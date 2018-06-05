@@ -28,6 +28,8 @@ left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
 DELETE
 FROM Work_Data_Hydrology 
 where LakeCode='104'
+/**********************************************************************************/
+
 
 
 

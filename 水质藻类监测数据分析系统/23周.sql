@@ -56,17 +56,16 @@ left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
 --水库编号
 SELECT *
 FROM Work_Algae_LakeLibrary
-where 	LakeName='大屯水库'
+where LakeName='大屯水库'
 --删除大屯庄水库数据
 DELETE FROM [dbo].[Work_Data_Hydrology]
 WHERE LakeCode in (SELECT LakeCode
 FROM Work_Algae_LakeLibrary where LakeName='大屯水库')
---加前缀，后缀方法
+--加前缀，后缀
 update [东平湖-水质3] set [监测点]=('东平湖-'+[监测点])
 
---ISNUMERIC   
---当输入表达式得数为一个有效的整数、浮点数、money   或   decimal   类型，那么   ISNUMERIC   返回   1；否则返回   0。返回值为   1   确保可以将   expression   转换为上述数字类型中的一种。
-
+--ISNUMERIC   是否为数值型数据
+--当输入表达式得数为一个有效的整数、浮点数、money或decimal 类型，那么ISNUMERIC 返回 1；否则返回 0。返回值为1确保可以将expression转换为上述数字类型中的一种。
 
 --水质数据插入-触发器
 USE [AlgaeDB]
@@ -96,11 +95,11 @@ BEGIN
                                         when CHARINDEX('<',[MonitorValue]) > 0  then  
                                                                            case when ISNUMERIC(SUBSTRING([MonitorValue],2, LEN([MonitorValue])-2))=1 then  cast (  SUBSTRING([MonitorValue],2,LEN([MonitorValue])-2)/2  as FLOAT)
                                                                            else '0' end
-                                        else '0' END
+                                        else '0' END   
                               WHEN CHARINDEX('<',[MonitorValue]) > 0--存在<符号
                               THEN CAST( RIGHT('<10', LEN('<10')-1) AS FLOAT)
-                              ELSE 0
-                               
+                              ELSE ''
+     
                               END as MonitorValue,
 
       
@@ -143,8 +142,16 @@ BEGIN
 
     END;
 
+/**********************************************************************************/
+--截取
+SELECT LEN('123456789')--9
+SELECT left('123456789',3)--123
 
+select charindex('-','123456-89')--7
+select charindex('-','123456-8-9')--7
 
+select SUBSTRING('123456789',-1,6)--1234
+select SUBSTRING('123456789',-2,6)--123
 
 
 

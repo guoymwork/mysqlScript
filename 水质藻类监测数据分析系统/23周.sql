@@ -3,7 +3,7 @@
 --导入水文数据
 insert Work_Data_Hydrology
 (
-	   [Id]
+	 [Id]
       ,[MonitorDate]
       ,[LakeCode]
       ,[SectionCode]
@@ -15,7 +15,7 @@ insert Work_Data_Hydrology
 SELECT newid() as id
       ,[采样日期]
       ,lake.LakeCode
-	  ,sec.SectionCode  
+	,sec.SectionCode  
       ,[风向]
       ,[风力]
       ,[水深]
@@ -32,7 +32,7 @@ where LakeCode='104'
 --导入大屯水库 6-6水文数据
 insert Work_Data_Hydrology
 (
-	   [Id]
+	 [Id]
       ,[MonitorDate]
       ,[LakeCode]
       ,[SectionCode]
@@ -44,7 +44,7 @@ insert Work_Data_Hydrology
 SELECT newid() as id
       ,[采样日期]
       ,lake.LakeCode
-	  ,sec.SectionCode  
+	,sec.SectionCode  
       ,[风向]
       ,[风力]
       ,[水深]
@@ -57,7 +57,12 @@ left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
 SELECT *
 FROM Work_Algae_LakeLibrary
 where 	LakeName='大屯水库'
-
+--删除大屯庄水库数据
+DELETE FROM [dbo].[Work_Data_Hydrology]
+WHERE LakeCode in (SELECT LakeCode
+FROM Work_Algae_LakeLibrary where LakeName='大屯水库')
+--加前缀：
+update [东平湖-水质3] set [监测点]=('东平湖-'+[监测点])
 
 
 

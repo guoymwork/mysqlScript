@@ -97,8 +97,6 @@ BEGIN
                                                                            case when ISNUMERIC(SUBSTRING([MonitorValue],2, LEN([MonitorValue])-2))=1 then  cast (  SUBSTRING([MonitorValue],2,LEN([MonitorValue])-2)/2  as FLOAT)
                                                                            else '0' end
                                         else '0' END
-
-                                  
                               WHEN CHARINDEX('<',[MonitorValue]) > 0--存在<符号
                               THEN CAST( RIGHT('<10', LEN('<10')-1) AS FLOAT)
                               ELSE 0

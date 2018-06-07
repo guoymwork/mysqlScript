@@ -144,14 +144,18 @@ BEGIN
 
 /**********************************************************************************/
 --截取
+
 SELECT LEN('123456789')--9
 SELECT left('123456789',3)--123
 
-select charindex('-','123456-89')--7
+select charindex('-','骆马湖-骆马湖区（东）')--7
 select charindex('-','123456-8-9')--7
 
 select SUBSTRING('123456789',-1,6)--1234
 select SUBSTRING('123456789',-2,6)--123
+select SUBSTRING('123456789',1,9)--123456
+
+select SUBSTRING('骆马湖-骆马湖区（东）',charindex('-','骆马湖-骆马湖区（东）')+1,LEN('骆马湖-骆马湖区（东）') )--骆马湖区（东）
 --导入东湖水库-水文3
 insert Work_Data_Hydrology
 (
@@ -294,6 +298,7 @@ SELECT newid() as id
 FROM [dbo].[双王城水库-水文3] imp
 left join Work_Algae_LakeLibrary lake on LakeName=imp.[湖库]
 left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
+/**********************************************************************************/
 
 
 

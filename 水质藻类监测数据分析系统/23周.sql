@@ -299,7 +299,48 @@ FROM [dbo].[双王城水库-水文3] imp
 left join Work_Algae_LakeLibrary lake on LakeName=imp.[湖库]
 left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
 /**********************************************************************************/
-
+SELECT     [MonitorDataId],[SectionCode],[MonitorDate],
+					[MonitorItemCode],[MonitorValue],[State]
+FROM  Work_Data_Water  UNPIVOT
+	( [MonitorValue] FOR [MonitorItemCode] 
+	IN (
+		[Item_Swen],
+		[Item_Swei],
+		[Item_pH],
+		[Item_Ddl],
+		[Item_Toumingdu],
+		[Item_Zdu],
+		[Item_Rjy],
+		[Item_Gmsyzs],
+		[Item_Shxyl],
+		[Item_Ad],
+		[Item_Syl],
+		[Item_Zdan],
+		[Item_Zlhk],
+		[Item_Yelvsu],
+		[Item_Hff],
+		[Item_Zgong],
+		[Item_Zqian],
+		[Item_Hxxyl],
+		[Item_Ztong],
+		[Item_Zxin],
+		[Item_Fhw],
+		[Item_Sjx],
+		[Item_Zshen],
+		[Item_Zge],
+		[Item_Ljg],
+		[Item_Zqhw],
+		[Item_Ylz],
+		[Item_Lhw],
+		[Item_Fdc],
+		[Item_Liusuanyan],
+		[Item_Lvhuawu],
+		[Item_Xiaosuanyan],
+		[Item_Tie],
+		[Item_Zongmeng],
+		[Item_Xsyd],
+		[Item_Yxsyd])
+		) as F
 
 
 

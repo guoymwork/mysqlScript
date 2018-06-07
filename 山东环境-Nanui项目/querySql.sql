@@ -387,5 +387,3 @@ SELECT TOP 1000 [Id]
  AND YEAR(A.MonitorDate) IN (2018) AND MONTH(A.MonitorDate) IN (2,4,5,6)  AND A.DataType IN (1) 
 --分组类型：1河流，2湖库，3饮用水河流，4饮用水湖库，5地下饮用水，6河流采测，7湖库采测，8饮用水地表（Item_Zonglin）
  SELECT MonitorItemCode FROM [dbo].[Work_WaterMonitorItem] WHERE GroupID=1 ORDER BY Sort 
-
-

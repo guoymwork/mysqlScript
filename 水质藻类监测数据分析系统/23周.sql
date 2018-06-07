@@ -152,6 +152,161 @@ select charindex('-','123456-8-9')--7
 
 select SUBSTRING('123456789',-1,6)--1234
 select SUBSTRING('123456789',-2,6)--123
+--导入东湖水库-水文3
+insert Work_Data_Hydrology
+(
+	 [Id]
+      ,[MonitorDate]
+      ,[LakeCode]
+      ,[SectionCode]
+      ,[WindDirection]
+      ,[WindPower]
+      ,[WaterDepth]
+      ,[WaterLevel]
+)
+SELECT newid() as id
+      ,[采样日期]
+      ,lake.LakeCode
+	,sec.SectionCode  
+      ,[风向]
+      ,[风力]
+      ,[水深]
+      ,[水位]
+FROM [dbo].[东湖水库-水文3] imp
+left join Work_Algae_LakeLibrary lake on LakeName=imp.[湖库]
+left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
+/**********************************************************************************/
+SELECT *
+FROM Work_Algae_LakeLibrary
+WHERE LakeName='东湖水库'
+
+--导入东湖水库-水文3
+insert Work_Data_Hydrology
+(
+	 [Id]
+      ,[MonitorDate]
+      ,[LakeCode]
+      ,[SectionCode]
+      ,[WindDirection]
+      ,[WindPower]
+      ,[WaterDepth]
+      ,[WaterLevel]
+)
+SELECT newid() as id
+      ,[采样日期]
+      ,lake.LakeCode
+	,sec.SectionCode  
+      ,[风向]
+      ,[风力]
+      ,[水深]
+      ,[水位]
+FROM [dbo].[骆马湖-水文3] imp
+left join Work_Algae_LakeLibrary lake on LakeName=imp.[湖库]
+left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
+
+SELECT *
+FROM
+水文模板
+where [采样日期] is null
+
+--删除空数据
+DELETE
+FROM
+水文模板
+where [采样日期] is null
+
+--查询30分钟内插入的骆马湖数据
+SELECT *
+FROM Work_Data_Hydrology
+WHERE LakeCode in (
+SELECT LakeCode
+FROM Work_Algae_LakeLibrary
+where LakeName='大屯水库'
+)
+and OptTime BETWEEN DATEADD( minute,-360,GETDATE()) and getdate()
+--删除十分钟内插入的骆马湖数据
+DELETE
+FROM Work_Data_Hydrology
+WHERE LakeCode in (
+SELECT LakeCode
+FROM Work_Algae_LakeLibrary
+where LakeName='骆马湖'
+)
+and OptTime BETWEEN DATEADD( minute,-30,GETDATE()) and getdate()
+
+update 
+[骆马湖-水文3]
+set [站名]=('骆马湖-'+[站名])
+
+SELECT *
+FROM [骆马湖-水文3]
+
+update 
+[骆马湖-水文3]
+set [湖库]='骆马湖'
+
+--导入骆马湖水文数据
+insert Work_Data_Hydrology
+(
+	 [Id]
+      ,[MonitorDate]
+      ,[LakeCode]
+      ,[SectionCode]
+      ,[WindDirection]
+      ,[WindPower]
+      ,[WaterDepth]
+      ,[WaterLevel]
+)
+SELECT newid() as id
+      ,[采样日期]
+      ,lake.LakeCode
+	,sec.SectionCode  
+      ,[风向]
+      ,[风力]
+      ,[水深]
+      ,[水位]
+FROM [dbo].[骆马湖-水文3] imp
+left join Work_Algae_LakeLibrary lake on LakeName=imp.[湖库]
+left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
+--站名加前缀
+update [洪泽湖-水文3]
+set 站名=('洪泽湖-'+[站名])
+--导入双王城水库水文数据
+insert Work_Data_Hydrology
+(
+	 [Id]
+      ,[MonitorDate]
+      ,[LakeCode]
+      ,[SectionCode]
+      ,[WindDirection]
+      ,[WindPower]
+      ,[WaterDepth]
+      ,[WaterLevel]
+)
+SELECT newid() as id
+      ,[采样日期]
+      ,lake.LakeCode
+	,sec.SectionCode  
+      ,[风向]
+      ,[风力]
+      ,[水深]
+      ,[水位]
+FROM [dbo].[双王城水库-水文3] imp
+left join Work_Algae_LakeLibrary lake on LakeName=imp.[湖库]
+left join Work_Algea_Section sec on sec.SectionName=imp.[站名]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

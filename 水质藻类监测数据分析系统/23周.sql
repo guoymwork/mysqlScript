@@ -324,17 +324,3 @@ SELECT MonitorItem_Name, count(MonitorItem_Code)  FROM [dbo].[Work_FunctionOcIte
 GROUP  by MonitorItem_Name
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-

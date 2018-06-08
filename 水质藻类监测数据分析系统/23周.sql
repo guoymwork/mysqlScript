@@ -155,7 +155,14 @@ select SUBSTRING('123456789',-1,6)--1234
 select SUBSTRING('123456789',-2,6)--123
 select SUBSTRING('123456789',1,9)--123456
 
+SELECT CHARINDEX('L', '<DL')--3
+SELECT RIGHT('<10L', LEN('<10L')-1)--10L
+SELECT SUBSTRING('<101L', 2,len('<110L')-2)--101
+SELECT REPLACE('<10L', '<', '') --10L
+
 select SUBSTRING('骆马湖-骆马湖区（东）',charindex('-','骆马湖-骆马湖区（东）')+1,LEN('骆马湖-骆马湖区（东）') )--骆马湖区（东）
+
+
 --导入东湖水库-水文3
 insert Work_Data_Hydrology
 (
@@ -309,7 +316,12 @@ FROM  Work_Data_Water  UNPIVOT
 		[Item_Rjy],[Item_Gmsyzs],[Item_Shxyl],[Item_Ad],
 		[Item_Yxsyd])
 	) as F
+/**********************************************************************************/
+SELECT * FROM [dbo].[Work_FunctionOcItem]
+order by MonitorItem_Name
 
+SELECT MonitorItem_Name, count(MonitorItem_Code)  FROM [dbo].[Work_FunctionOcItem]
+GROUP  by MonitorItem_Name
 
 
 

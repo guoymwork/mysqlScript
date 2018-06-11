@@ -323,4 +323,3 @@ order by MonitorItem_Name
 SELECT MonitorItem_Name, count(MonitorItem_Code)  FROM [dbo].[Work_FunctionOcItem]
 GROUP  by MonitorItem_Name
 
-
